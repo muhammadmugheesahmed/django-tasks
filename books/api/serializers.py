@@ -49,21 +49,21 @@ class BookSerializer(serializers.ModelSerializer):
         return data
 
 
-    # Handle ManyToMany field properly
-    def create(self, validated_data):
-        genres_data = validated_data.pop('genres', [])
-        book = Book.objects.create(**validated_data)
-        book.genres.set(genres_data)  # assign multiple genres
-        return book
+    # # Handle ManyToMany field properly
+    # def create(self, validated_data):
+    #     genres_data = validated_data.pop('genres', [])
+    #     book = Book.objects.create(**validated_data)
+    #     book.genres.set(genres_data)  # assign multiple genres
+    #     return book
 
-    def update(self, instance, validated_data):
-        genres_data = validated_data.pop('genres', None)
-        for attr, value in validated_data.items():
-            setattr(instance, attr, value)
-        instance.save()
-        if genres_data is not None:
-            instance.genres.set(genres_data)
-        return instance
+    # def update(self, instance, validated_data):
+    #     genres_data = validated_data.pop('genres', None)
+    #     for attr, value in validated_data.items():
+    #         setattr(instance, attr, value)
+    #     instance.save()
+    #     if genres_data is not None:
+    #         instance.genres.set(genres_data)
+    #     return instance
 
 #  ---------------Hyperlinked serializer for navigable APIs------------
 
